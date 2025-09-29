@@ -1,1 +1,160 @@
-/* You can add global styles to this file, and also import other style files */
+
+/* -- 1) sensible vars -------------------------------------------------- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+ --site-bg: #eaeaea;
+
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* -- 3) remove default margins/paddings on root elements ------------- */
+/* This is the key: zero the margins that browsers add in the UA stylesheet */
+html, body {
+  height: 100%;
+  margin: 0;      /* IMPORTANT: removes default 8px in many browsers */
+  padding: 0;     /* some UAs used padding historically on html/body */
+  background: var(--site-bg);
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* also remove flow margins from common block elements */
+body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd, ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
+/* -- 4) full-height wrapping containers ------------------------------- */
+/* ensure your app root and main wrappers expand, so background covers viewport */
+#app, .page-wrapper, main, .home-wrapper {
+  min-height: 100vh;
+}
+
+/* -- 5) images/media layout niceness --------------------------------- */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* -- 6) iOS notch / safe-area support -------------------------------- */
+/* background applied to html + body ensures visual bleed to device edges */
+/* body gets padding via env() so content respects the notch / home indicator */
+html {
+  background: var(--site-bg);
+}
+body {
+  min-height: 100vh;
+  /* allow content to respect iOS safe area while background stays edge-to-edge */
+  padding-top: env(safe-area-inset-top);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+}
+
+.dropdown-open {
+  max-height: 500px;
+  opacity: 1;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.dropdown-closed {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+/* Wrapper ensures hover works for both trigger + dropdown */
+.services-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Trigger text */
+.services-trigger {
+  cursor: pointer;
+  padding: 8px 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Dropdown (hidden by default) */
+.services-dropdown {
+  position: absolute;
+  top: 100%; 
+  left: 0;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  min-width: 220px;
+  overflow: hidden;
+  z-index: 999;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    max-height 420ms cubic-bezier(.2,.9,.2,1),
+    opacity 220ms ease,
+    transform 360ms ease,
+    padding 320ms ease;
+  pointer-events: none;
+}
+
+/* Show dropdown when hovering wrapper */
+.services-wrapper:hover .services-dropdown {
+  max-height: 420px;
+  opacity: 1;
+  transform: translateY(0);
+  padding: 14px;
+  pointer-events: auto;
+}
+
+/* grid 2 columns */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  text-align: center;
+  align-items: start;
+}
+
+/* service card */
+.service-card {
+  width: 40px;
+  height: 40px;
+  background: #a86a42;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.service-item:hover .service-card {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+/* label below */
+.service-label {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.1;
+}
+
+.service-item.empty { visibility: hidden; }
+

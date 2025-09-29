@@ -1,0 +1,229 @@
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}@media (max-width: 992px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .last-single {
+    grid-column: auto; /* reset so it aligns naturally */
+  }
+}
+
+/* Mobile (1 per row) */
+@media (max-width: 600px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .last-single {
+    grid-column: auto; /* no centering needed */
+  }
+}
+
+.team-card {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.card-details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.last-single {
+  grid-column: 2 / span 1;
+}
+.about-section {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.about-section.alt-bg { border-radius: 12px; }
+
+.about-container.reverse { flex-direction: row-reverse; }
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.about-text {
+  flex: 1;
+}
+.about-image {
+  flex: 1;
+  display: flex;
+  justify-content: center; 
+}
+
+.about-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.values-section, .process-section {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+.section-title { font-size: 28px; margin-bottom: 30px; }
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 30px;
+}
+.value-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+.value-card:hover { transform: translateY(-6px); }
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 30px;
+}
+.step-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+.step-number {
+  font-size: 22px;
+  font-weight: bold;
+  color: #0077b6;
+  margin-bottom: 10px;
+}
+
+/* Animations */
+.fade-up { opacity: 0; transform: translateY(30px); animation: fadeInUp 0.8s ease forwards; }
+@keyframes fadeInUp {
+  from { opacity:0; transform: translateY(30px); }
+  to { opacity:1; transform: translateY(0); }
+}
+.user-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 80px 20px;
+
+  text-align: center;
+}
+
+.user-hero-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 80px);
+  grid-auto-rows: 80px;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  z-index: 1;
+}
+
+.hero-cell {
+  width: 80px;
+  height: 80px;
+  background: #e5e7eb;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.6s;
+  perspective: 1000px;
+}
+
+.hero-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* shapes */
+.square       { border-radius: 0; }
+.circle       { border-radius: 50%; }
+.round-tl     { border-top-left-radius: 50%; }
+.round-tr     { border-top-right-radius: 50%; }
+.round-bl     { border-bottom-left-radius: 50%; }
+.round-br     { border-bottom-right-radius: 50%; }
+.round-diag   { border-top-right-radius: 50%; border-bottom-left-radius: 50%; }
+
+/* flip animation */
+.hero-cell.flip {
+  animation: flipAnim 0.6s ease;
+}
+
+@keyframes flipAnim {
+  0%   { transform: rotateY(0deg); }
+  50%  { transform: rotateY(90deg); opacity: 0; }
+  100% { transform: rotateY(0deg); opacity: 1; }
+}
+
+/* central message */
+.user-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px;
+  background:  #eaeaea;
+  border-radius: 40px;
+
+}
+
+.user-hero-content h2 {
+  font-size: 32px;
+  margin-bottom: 12px;
+  color: #111;
+}
+
+.user-hero-content p {
+  font-size: 18px;
+  color: #555;
+}

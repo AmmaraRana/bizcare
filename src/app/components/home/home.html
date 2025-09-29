@@ -1,0 +1,569 @@
+<style>
+  /* scroller basics (in-file) */
+  .scroller { overflow: hidden; box-sizing: border-box; width: 100%; }
+  .track { display:flex; gap:12px; align-items:center; white-space:nowrap; box-sizing:border-box; }
+  .clients-track { animation: scroll-left 18s linear infinite; }
+  .apps-track { animation: scroll-right 20s linear infinite; }
+  /* pause on hover */
+  .scroller:hover .clients-track,
+  .scroller:hover .apps-track { animation-play-state: paused; }
+  /* keyframes: clients move right->left (content goes left), apps move left->right (content goes right) */
+  @keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* duplicate content => -50% loops */
+  }
+  @keyframes scroll-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+  /* hide webkit scrollbar if user scrolls */
+  .scroller::-webkit-scrollbar { display:none; }
+</style>
+<!-- Hero Section -->
+
+
+<div style="min-height:calc(100vh - 200px);display:flex;flex-direction:column;justify-content:flex-start;align-items:center;padding-top:36px;width:100%;box-sizing:border-box;margin:0;height:auto;position:relative;overflow:hidden;">
+
+  <!-- Left Floating Image -->
+  <img src="/left.png" 
+       alt="Left Image"
+       style="position:absolute;left:0;top:20%;transform:translateY(-50%);animation:floatY 4s ease-in-out infinite;max-height:80%;object-fit:cover;" />
+
+  <!-- Right Floating Image -->
+  <img src="/right.png" 
+       alt="Right Image"
+       style="position:absolute;right:0;top:25%;transform:translateY(-50%);animation:floatY 4s ease-in-out infinite;max-height:80%;object-fit:cover;" />
+
+  <div style="max-width:1100px;width:100%;padding:0 24px;text-align:center;z-index:2;">
+    <!-- Heading -->
+    <h1 style="font-family:'Montserrat', sans-serif; font-size:2.75rem; line-height:1.4; font-weight:700; color:#111827; margin:0;">
+      Empowering the Business with 
+      <br />
+      Smart Software Solutions
+    </h1>
+
+    <!-- Buttons -->
+  <div style="margin-top:16px; margin-bottom:150px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+  <button class="btn btn-pricing" routerLink="/pricing">
+    View Plans & Pricing
+  </button>
+
+
+    <!-- Button -->
+<button
+  style="border-radius:30px; padding:12px 28px; font-weight:500; cursor:pointer; transition:all .25s ease; background:#a86a42; color:white; border:1.2px solid transparent; display:flex; align-items:center; gap:10px;"
+  onmouseover="this.style.backgroundColor='white'; this.style.color='#a86a42'; this.style.border='1.2px solid #a86a42'; this.querySelector('svg').style.fill='#a86a42';"
+  onmouseout="this.style.backgroundColor='#a86a42'; this.style.color='white'; this.style.border='1.2px solid transparent'; this.querySelector('svg').style.fill='white';"
+  onclick="document.getElementById('myModal').style.display='flex';"
+>
+  Request a Consultation
+
+</button>
+
+<!-- Modal -->
+<div id="myModal" 
+     style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+            background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:1000;">
+  
+  <div style="background:white; padding:30px; border-radius:16px; width:100%; max-width:450px; 
+              box-shadow:0 6px 20px rgba(0,0,0,0.3); font-family:Arial, sans-serif;">
+
+    <h2 style="margin-bottom:10px; font-size:22px; color:#111; text-align:center;">
+      Let’s Work Together
+    </h2>
+    <p style="margin-bottom:20px; font-size:14px; color:#555; text-align:center;">
+      Fill in your details and we’ll reach out shortly.
+    </p>
+
+    <form>
+      <input type="text" placeholder="Your Name" style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
+      <input type="email" placeholder="Your Email" style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
+
+      <select style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px; font-size:14px;">
+        <option value="" disabled selected>Budget Range</option>
+        <option>Under $1,000</option>
+        <option>$1,000 – $5,000</option>
+        <option>$5,000 – $10,000</option>
+        <option>Above $10,000</option>
+      </select>
+
+      <select style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px; font-size:14px;">
+        <option value="" disabled selected>Services Required</option>
+        <option>ERP System</option>
+        <option>Accounting / Inventory / POS</option>
+        <option>WhatsApp Cloud API Integration</option>
+        <option>Digital Marketing</option>
+        <option>E-Commerce Solutions</option>
+        <option>Hardware & Installation Support</option>
+        <option>After-Sales & Maintenance</option>
+        <option>Other</option>
+      </select>
+
+      <textarea placeholder="Tell us more about your project..." style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; font-size:14px; height:90px; resize:none;"></textarea>
+
+      <div style="display:flex; justify-content:space-between; gap:10px;">
+        <button type="button" onclick="document.getElementById('myModal').style.display='none';" 
+                style="flex:1; background:#f5f5f5; border:none; padding:12px; border-radius:9999px; cursor:pointer; font-size:14px;">
+          Cancel
+        </button>
+        <button type="submit" style="flex:1; background:#a86a42; color:white; border:none; padding:12px; border-radius:9999px; cursor:pointer; font-size:14px;">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+    </div>
+
+    <!-- Mobile App Section (now inside hero) -->
+    <h5 style=" color:#6b7280; text-align:center; margin:3px 0 4px 0;">Our Client Comes from all over Pakistan</h5>
+<!-- Logo Scrolling Section -->
+<div class="logo-marquee" style="overflow:hidden; white-space:nowrap; padding:20px 0;">
+  <div class="logo-track">
+    
+    <!-- First set of logos with names -->
+    <div *ngFor="let logo of logos"
+         style="display:inline-flex; align-items:center; margin:0 40px;">
+      <img [src]="logo.image" [alt]="logo.name"
+           style="height:40px; width:auto; object-fit:contain; display:inline-block;">
+      <span style="margin-left:12px; font-size:18px; font-weight:500; color:#6b7280; white-space:nowrap;">
+        {{ logo.name }}
+      </span>
+    </div>
+
+    <!-- Duplicate set for seamless loop -->
+    <div *ngFor="let logo of logos"
+         style="display:inline-flex; align-items:center; margin:0 40px;">
+      <img [src]="logo.image" [alt]="logo.name"
+           style="height:40px; width:auto; object-fit:contain; display:inline-block;">
+      <span style="margin-left:12px; font-size:18px; font-weight:500; color:#6b7280; white-space:nowrap;">
+        {{ logo.name }}
+      </span>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<style>
+.logo-track {
+  display: inline-flex;
+  width: max-content;
+  animation: scroll-left 20s linear infinite;
+}
+
+@keyframes scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+</style>
+
+
+<!-- Portfolio Section -->
+<div class="scroller" style="padding:20px 0; overflow-x:auto; white-space:nowrap;">
+  <div class="apps-track track" style="display:flex; gap:24px;">
+
+    <!-- Dynamic Portfolio Card -->
+    <div *ngFor="let project of projects"
+         (click)="goToPortfolio(project.city)"
+         style="flex:0 0 auto; width:320px; height:480px; border-radius:18px; overflow:hidden; position:relative; box-shadow:0 4px 12px rgba(0,0,0,0.2); cursor:pointer;">
+
+      <!-- Project Image -->
+      <img [src]="project.image" [alt]="project.city"
+           (error)="onImgError($event)"
+           style="width:100%; height:100%; object-fit:cover; display:block;">
+
+      <!-- Overlay with structured layout -->
+      <div class="overlay">
+        <!-- City name (top-left) -->
+        <div class="overlay-city">
+          {{ project.city }}
+        </div>
+
+        <!-- Center link icon -->
+        <div class="overlay-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" viewBox="0 0 24 24">
+            <path d="M10.59 13.41a1 1 0 0 0 1.41 1.41l5-5a1 1 0 0 0-1.41-1.41l-5 5zm-5.18-1.82a5.001 5.001 0 0 0 7.07 7.07l1.42-1.42a1 1 0 0 0-1.42-1.42l-1.42 1.42a3 3 0 1 1-4.24-4.24l1.42-1.42a1 1 0 0 0-1.42-1.42l-1.42 1.42zM18.36 5.64a5.001 5.001 0 0 0-7.07 0l-1.42 1.42a1 1 0 0 0 1.42 1.42l1.42-1.42a3 3 0 1 1 4.24 4.24l-1.42 1.42a1 1 0 1 0 1.42 1.42l1.42-1.42a5.001 5.001 0 0 0 0-7.07z"/>
+          </svg>
+        </div>
+
+        <!-- Bottom text -->
+        <div class="overlay-footer">
+          View our client in {{ project.city }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<style>
+  /* hover effect */
+  .apps-track > div:hover .overlay {
+    opacity: 1;
+  }
+</style>
+
+  </div>
+</div>
+
+
+<!-- Floating Animation -->
+<style>
+@keyframes floatY {
+  0%, 100% {
+    transform: translateY(-50%) translateY(0px);
+  }
+  50% {
+    transform: translateY(-50%) translateY(-15px);
+  }
+}
+</style>
+
+
+
+
+<!-- Journey Section -->
+<section style="display:flex;flex-wrap:wrap;width:100%;min-height:100vh;box-sizing:border-box;">
+
+  <!-- Left: Illustration -->
+  <div style="flex:1 1 50%;display:flex;justify-content:center;align-items:center;
+              padding:40px;box-sizing:border-box;">
+    <img src="commitment.png" alt="Journey Illustration" 
+         style="max-width:100%;height:auto;object-fit:contain;" />
+  </div>
+
+  <!-- Right: Text -->
+  <div style="flex:1 1 50%;display:flex;flex-direction:column;justify-content:center;
+              align-items:flex-start;padding:40px;text-align:left;box-sizing:border-box;">
+    <h2 style="font-size:32px;font-weight:bold;margin-bottom:20px;">
+      Our Journey and Commitment to Excellence
+    </h2>
+    <p style="font-size:16px;line-height:1.6;margin-bottom:15px;color:#333;">
+      BizCare Software Solutions is more than just a tech company. We empower businesses 
+      with intelligent ERP systems, streamlined processes, and tools that transform 
+      operations into sustainable growth.
+    </p>
+    <p style="font-size:16px;line-height:1.6;margin-bottom:15px;color:#333;">
+      From supply chain management to accounting, HR, and digital integration, 
+      we deliver software that simplifies complexity. Our tailored solutions ensure 
+      businesses not only run efficiently but also stay ahead in competitive markets.
+    </p>
+    <p style="font-size:16px;line-height:1.6;margin-bottom:15px;color:#333;">
+      As innovators, we continually evolve by adopting the latest technologies, 
+      leveraging cloud, automation, and data insights. Our success is measured 
+      by the trust and long-term partnerships we build with our clients.
+    </p>
+    <p style="font-size:16px;line-height:1.6;margin-bottom:15px;color:#333;">
+      Let’s collaborate to harness technology that drives efficiency, profitability, 
+      and future-readiness for your business.
+    </p>
+  </div>
+
+</section>
+<section style="background:#dfdfe2; padding:60px 20px; text-align:center;">
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:20px; max-width:1000px; margin:0 auto;">
+
+    <!-- Happy Clients -->
+    <div style="background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.08); display:flex; align-items:center; justify-content:center; gap:15px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" viewBox="0 0 24 24">
+        <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+      </svg>
+      <div>
+        <h2 style="font-size:28px; margin:0;" id="clients">{{ clients }}</h2>
+        <p style="color:#555; margin:0;">Happy Clients</p>
+      </div>
+    </div>
+
+    <!-- Years of Excellence -->
+    <div style="background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.08); display:flex; align-items:center; justify-content:center; gap:15px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" viewBox="0 0 24 24">
+        <path d="M3 3h18v2H3V3zm2 4h14v14H5V7zm2 2v10h10V9H7z"/>
+      </svg>
+      <div>
+        <h2 style="font-size:28px; margin:0;" id="years">{{ years }}</h2>
+        <p style="color:#555; margin:0;">Years of Excellence</p>
+      </div>
+    </div>
+
+    <!-- Hours of Support -->
+    <div style="background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.08); display:flex; align-items:center; justify-content:center; gap:15px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" viewBox="0 0 24 24">
+        <path d="M12 1a11 11 0 1 0 0 22 11 11 0 1 0 0-22zm1 11h6v2h-8V6h2v6z"/>
+      </svg>
+      <div>
+        <h2 style="font-size:28px; margin:0;" id="support">{{ support }}</h2>
+        <p style="color:#555; margin:0;">Hours of Support</p>
+      </div>
+    </div>
+
+    <!-- Cities Covered -->
+    <div style="background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.08); display:flex; align-items:center; justify-content:center; gap:15px;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" viewBox="0 0 24 24">
+        <path d="M12 2C8.1 2 5 5.1 5 9c0 5.3 7 13 7 13s7-7.7 7-13c0-3.9-3.1-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/>
+      </svg>
+      <div>
+        <h2 style="font-size:28px; margin:0;" id="cities">{{ cities }}</h2>
+        <p style="color:#555; margin:0;">Cities Covered</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<style>
+  /* Mobile and small screens: stack vertically */
+  @media (max-width: 767px) {
+    section {
+      flex-direction: column;
+    }
+    section > div {
+      flex: 1 1 100% !important;
+      padding: 20px !important;
+    }
+    section img {
+      max-height: 250px; /* keep image smaller on phones */
+    }
+  }
+</style>
+<section id="services" style="padding:48px 20px;">
+  <div style="max-width:1100px; margin:0 auto; box-sizing:border-box;">
+
+    <!-- top row -->
+    <div class="services-top">
+      <!-- left text -->
+      <div class="services-text">
+        <h2>Our Services</h2>
+        <p>
+          BizCare delivers reliable ERP and industry-specific software solutions — accounting, inventory, POS,
+          and customized modules — built to streamline your business operations.
+        </p>
+      </div>
+
+      <!-- right mini icons -->
+      <div class="mini-icons">
+        <ng-container *ngFor="let small of services; let i = index">
+          <div
+            (click)="goToService(i)"
+            [style.background]="small.color"
+            [title]="small.title"
+            (mouseenter)="hoverIndex = i" 
+            (mouseleave)="hoverIndex = null"
+            [style.transform]="hoverIndex === i ? 'scale(1.15)' : 'scale(1)'"
+            [style.boxShadow]="hoverIndex === i ? '0 4px 12px rgba(0,0,0,0.15)' : '0 2px 6px rgba(0,0,0,0.08)'"
+            class="mini-icon"
+          >
+            <span>{{ small.icon }}</span>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- big card -->
+    <div class="services-card">
+      <button (click)="prev()" aria-label="Previous" class="nav-btn prev">
+      
+<svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" 
+     style="display:inline-block; vertical-align:middle;">
+  <path d="M15 6l-6 6 6 6" 
+        fill="none" stroke="currentColor" stroke-width="2" 
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+      </button>
+
+      <div *ngIf="services[currentIndex]" [@cardAnimation] class="card-content">
+        <!-- left -->
+        <div class="card-left">
+          <div class="icon-row">
+            <div class="big-icon" [style.background]="services[currentIndex].color">
+              {{ services[currentIndex].icon }}
+            </div>
+            <div>
+              <h3>{{ services[currentIndex].title }}</h3>
+              <button class="learn-btn">Learn More</button>
+            </div>
+          </div>
+          <p>{{ services[currentIndex].description }}</p>
+        </div>
+
+        <!-- right -->
+        <div class="card-right">
+          <ul>
+            <li *ngFor="let f of services[currentIndex].features">
+              <span>✓</span>
+              <span>{{ f }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <button (click)="next()" aria-label="Next" class="nav-btn next">
+       <!-- Minimal: inherits color from surrounding text (use CSS color on parent) -->
+<svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display:inline-block; vertical-align:middle;">
+  <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+      </button>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- Platforms / Solutions Section -->
+<section id="platforms" style="padding:60px 20px;">
+  <div style="max-width:1100px; margin:0 auto; text-align:center;">
+
+    <!-- Heading -->
+    <h2 style="font-size:32px; font-weight:700; margin:0; color:#111827;">
+      Solutions & Modules We Provide
+    </h2>
+    <p style="color:#6b7280; margin:12px 0 40px;">
+      BizCare Software Solutions delivers scalable ERP systems and business modules
+      that streamline operations and boost efficiency across industries.
+    </p>
+
+    <!-- Modules / Solutions row -->
+    <div style="display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:40px; margin-bottom:60px;">
+      <ng-container *ngFor="let m of modules">
+        <div style="display:flex; align-items:center; flex-direction:column; width:120px;">
+          <!-- icon holder (no background) -->
+          <div style="width:72px; height:72px; display:flex; align-items:center; justify-content:center;">
+            <!-- render sanitized SVG -->
+            <div [innerHTML]="m.svg" style="width:40px; height:40px; display:inline-flex;"></div>
+          </div>
+
+          <!-- module name -->
+          <span style="font-size:15px; font-weight:500; color:#111827; text-align:center; margin-top:6px;">
+            {{ m.name }}
+          </span>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Call to action -->
+    <h2 style="font-size:28px; font-weight:700; margin:0; color:#111827;">
+      Ready to Transform Your Business?
+    </h2>
+    <p style="color:#6b7280; margin:12px 0 0;">
+      From inventory to HR and accounting, BizCare provides comprehensive ERP solutions
+      tailored to your industry and business needs.
+    </p>
+  </div>
+</section>
+
+
+
+
+<!-- 
+<section class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="mb-3">Our Pricing Plans</h2>
+    <p class="text-muted mb-5">Choose the plan that works best for your business.</p>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card text-white bg-brown h-100">
+          <div class="card-body">
+            <h3 class="card-title">Platinum Subscription Package</h3>
+            <p>A seamless subscription service...</p>
+            <h4 class="fw-bold">$1K <small>/Month</small></h4>
+            <ul class="list-unstyled text-start">
+              <li>✔ End-to-end UI/UX Design</li>
+              <li>✔ Graphic Design</li>
+              <li>✔ Motion Graphics</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h3 class="card-title">Pinnacle Design and Development Package</h3>
+            <p>A comprehensive solution...</p>
+            <h4 class="fw-bold">Starting at $6,000</h4>
+            <ul class="list-unstyled text-start">
+              <li>✔ End-to-end UI/UX Design</li>
+              <li>✔ Graphic Design</li>
+              <li>✔ Motion Graphics</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card text-white bg-brown h-100">
+          <div class="card-body">
+            <h3 class="card-title">Custom Packages</h3>
+            <p>Perfect for teams who need...</p>
+            <h4 class="fw-bold">Custom Pricing</h4>
+            <ul class="list-unstyled text-start">
+              <li>✔ APA & GDPR Compliance</li>
+              <li>✔ SEO Expertise</li>
+              <li>✔ UX/UI Product Design</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+ <!-- S/I section -->
+<!-- <section style="padding:60px 20px; display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-bottom:150px; background:#f0f0f0;">
+  
+
+  <div style="flex:1 1 520px; max-width:500px; background:#1e293b; border-radius:20px; padding:70px 30px; text-align:center; color:#e5e7eb; box-shadow:0 6px 15px rgba(0,0,0,0.15); transition:all 0.3s;"
+       onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 12px 24px rgba(0,0,0,0.25)';"
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 15px rgba(0,0,0,0.15)';">
+    <h2 style="font-size:32px; margin:0 0 12px;">Our Solutions</h2>
+    <p style="margin:0 0 20px; font-size:16px; line-height:1.5;">
+      Explore our real work and software solutions we deliver
+    </p>
+    <button
+      style="background:#fff; color:#000; border:2px solid #000; padding:12px 32px; border-radius:9999px; font-size:16px; font-weight:500; cursor:pointer; transition:all 0.3s;"
+      onmouseover="this.style.background='#000'; this.style.color='#fff';"
+      onmouseout="this.style.background='#fff'; this.style.color='#000';">
+      Learn More
+    </button>
+<div style="width:100%; height:280px; background:#374151; border-radius:12px; margin-top:32px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+  <img [src]="creationImage"
+       alt="Creation"
+       style="width:100%; height:100%; object-fit:cover; border-radius:12px;">
+</div>
+
+
+  </div>
+
+
+  <div style="flex:1 1 520px; max-width:500px; background:#1f3d32; border-radius:20px; padding:70px 30px; text-align:center; color:#e2e8f0; box-shadow:0 6px 15px rgba(0,0,0,0.15); transition:all 0.3s;"
+       onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 12px 24px rgba(0,0,0,0.25)';"
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 15px rgba(0,0,0,0.15)';">
+    <h2 style="font-size:32px; margin:0 0 12px;">Our Insights</h2>
+    <p style="margin:0 0 20px; font-size:16px; line-height:1.5;">
+      Check our blog & thoughts on tech, software & strategy
+    </p>
+    <button
+      style="background:#fff; color:#000; border:2px solid #000; padding:12px 32px; border-radius:9999px; font-size:16px; font-weight:500; cursor:pointer; transition:all 0.3s;"
+      onmouseover="this.style.background='#000'; this.style.color='#fff';"
+      onmouseout="this.style.background='#fff'; this.style.color='#000';">
+      Learn More
+    </button>
+   <div style="width:100%; height:280px; background:#374151; border-radius:12px; margin-top:32px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+  <img [src]="creationImage"
+       alt="Creation"
+       style="width:100%; height:100%; object-fit:cover; border-radius:12px;">
+</div>
+
+  </div>
+
+</section> -->

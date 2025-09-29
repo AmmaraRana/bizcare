@@ -1,0 +1,124 @@
+/* Make page flexbox to push footer down */
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content grows, footer stays at bottom */
+main {
+  flex: 1;
+}
+
+/* Footer Styling */
+.site-footer {
+  background: #000;
+  color: #fff;
+  border-radius: 20px;
+  margin: 0 40px 30px 40px; /* left, right, bottom spacing */
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* Top row */
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-logo span {
+  font-size: 22px;
+  font-weight: 600;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* size and brand color variables */
+  .logo-b{
+    --size: 50px;
+    --brand: #c77b3a;
+    width: var(--size);
+    height: var(--size);
+    position: relative;
+    display: inline-block;
+  }
+
+  /* stem (left vertical) */
+  .logo-b::before{
+    content: "";
+    position: absolute;
+    left: calc(var(--size) * 0.08); /* small left inset */
+    top: calc(var(--size) * 0.06);
+    width: calc(var(--size) * 0.20); /* stem thickness */
+    height: calc(var(--size) * 0.88);
+    background: var(--brand);
+    border-radius: calc(var(--size) * 0.06);
+  }
+
+  /* bowl (right circular part) */
+  .logo-b::after{
+    content: "";
+    position: absolute;
+    right: calc(var(--size) * 0.06);
+    top: calc(var(--size) * 0.18);
+    width: calc(var(--size) * 0.60);
+    height: calc(var(--size) * 0.60);
+    background: var(--brand);
+    border-radius: 50%;
+    box-shadow: 0 0 0 calc(var(--size) * 0.03) white inset; /* slight inner cut to make stylized shape */
+  }
+
+  /* triangular accent like your original clip-path look */
+  .logo-b::marker { /* noop to avoid marker pseudo collisions */ }
+  /* place a triangular wedge overlapping bowl to give geometric edge */
+  @supports (clip-path: polygon(0 0, 70% 50%, 0 100%)) {
+    .logo-b::before { /* keep stem as before; now add triangle using an inner wrapper */
+      /* nothing here; triangle added via a pseudo sibling element below using ::marker not widely used, so we add extra element approach */
+    }
+  }
+
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+
+.footer-socials svg {
+  width: 28px;
+  height: 28px;
+  fill: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.footer-socials svg:hover {
+  fill: #00e0ff;
+}
+
+/* Bottom row */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  border-top: 1px solid #333;
+  padding-top: 15px;
+  font-size: 14px;
+}
+
+.footer-bottom a {
+  color: #00e0ff;
+  text-decoration: none;
+}

@@ -1,0 +1,95 @@
+<section class="user-hero">
+  <div class="user-hero-grid">
+    <div *ngFor="let cell of heroCells; let i = index" 
+         class="hero-cell"
+         [ngClass]="cell.shape"
+         [class.flip]="cell.flipping">
+      <img *ngIf="cell.img" [src]="'' + cell.img" alt="Client">
+    </div>
+  </div>
+
+  <div class="user-hero-content">
+    <h2>1000+ Happy Users</h2>
+    <p>Who grow their business with BizCare</p>
+  </div>
+</section>
+
+
+<!-- ====== VISION ====== -->
+<section class="about-section fade-up alt-bg">
+  <div class="about-container reverse">
+    <div class="about-text">
+      <h2>Our Vision</h2>
+      <p>
+        To become the most trusted partner in digital transformation by delivering 
+        <strong>innovative, scalable, and industry-specific software</strong> that enables 
+        businesses to operate seamlessly, reduce costs, and enhance customer satisfaction.
+      </p>
+    </div>
+    <div class="about-image">
+      <img src="vision.png" alt="Our Vision">
+    </div>
+  </div>
+</section>
+
+<!-- ====== CORE VALUES ====== -->
+<!-- <section class="values-section fade-up">
+  <h2 class="section-title">Core Values</h2>
+  <div class="values-grid">
+    <div class="value-card" *ngFor="let value of values; let i=index"
+         [ngStyle]="{'animation-delay': (i * 0.2) + 's'}">
+      <div class="value-icon">
+        <img src="assets/images/value-placeholder.jpg" alt="Value Icon">
+      </div>
+      <h3>{{ value.title }}</h3>
+      <p>{{ value.desc }}</p>
+    </div>
+  </div>
+</section> -->
+
+<!-- ====== HOW WE WORK ====== -->
+<!-- <section class="process-section fade-up alt-bg">
+  <h2 class="section-title">How We Work</h2>
+  <div class="process-steps">
+    <div class="step-card" *ngFor="let step of steps; let i=index"
+         [ngStyle]="{'animation-delay': (i * 0.2) + 's'}">
+      <div class="step-number">{{ i+1 }}</div>
+      <h3>{{ step.title }}</h3>
+      <p>{{ step.desc }}</p>
+    </div>
+  </div>
+</section> -->
+
+<!-- ====== TEAM  ====== -->
+<section style="padding:60px 20px; font-family:Arial, sans-serif;">
+  <div class="team-grid">
+    <div *ngFor="let member of team; let i = index" 
+         class="team-card"
+         [ngStyle]="{'animation-delay': (i * 0.2) + 's'}"
+         [class.last-single]="i === team.length - 1 && team.length % 3 === 1">
+
+      <!-- Image -->
+      <div style="overflow:hidden;">
+        <img [src]="member.image" [alt]="member.name" 
+             style="width:100%; height:360px; object-fit:cover; transition:transform .5s ease;"
+             onmouseover="this.style.transform='scale(1.1)';" 
+             onmouseout="this.style.transform='scale(1)';">
+      </div>
+
+      <!-- Bottom details -->
+      <div class="card-details">
+        <div style="flex:1;">
+          <h3 style="margin:0; font-size:18px; font-weight:600; color:#111;">{{ member.name }}</h3>
+          <div style="width:40px; height:2px; background:#0077b6; margin:8px 0;"></div>
+          <p style="margin:0; font-size:14px; color:#555;">{{ member.role }}</p>
+        </div>
+        <a [href]="member.linkedin" target="_blank" style="margin-left:10px; display:flex; align-items:center;">
+          <!-- LinkedIn SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
+            <path fill="#9ca3af" d="M20.447 20.452H16.9v-5.569c0-1.327-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.364V9h3.4v1.561h.048c.474-.9 1.632-1.852 3.358-1.852 3.59 0 4.258 2.362 4.258 5.434v6.309zM5.337 7.433a1.979 1.979 0 01-1.978-1.978c0-1.091.887-1.978 1.978-1.978 1.092 0 1.979.887 1.979 1.978 0 1.091-.887 1.978-1.979 1.978zM7.119 20.452H3.554V9h3.565v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

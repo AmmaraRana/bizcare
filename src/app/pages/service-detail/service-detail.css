@@ -1,0 +1,9 @@
+.service-detail-page {
+  padding: 2rem;
+}
+
+.service-detail-page h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}

@@ -1,0 +1,11 @@
+/* desktop only */
+.header-btn {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .header-btn {
+    display: block;
+    margin-left: 20px; /* adjust based on your header layout */
+  }
+}

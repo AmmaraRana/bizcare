@@ -1,0 +1,103 @@
+<!-- wrapper: keeps things sized and provides stacking area -->
+<div style="position:relative; max-width:1200px; margin:0 auto; padding:40px 20px; margin-bottom: 220px; min-height:560px;">
+
+  <!-- ========== BizCare ERP (crossfade) ========== -->
+  <div
+    style="position:absolute; top:0; left:0; right:0; bottom:0; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:30px;"
+    [style.opacity]="serviceSlug === 'bizcareerp' ? '1' : '0'"
+    [style.transform]="serviceSlug === 'bizcareerp' ? 'translateY(0px)' : 'translateY(10px)'"
+    [style.transition]="'opacity 400ms ease, transform 400ms ease'"
+    [style.pointerEvents]="serviceSlug === 'bizcareerp' ? 'auto' : 'none'">
+
+    <!-- Left: image -->
+    <div style="flex:1 1 45%; min-width:280px; text-align:center; ">
+      <img
+        src="be.jpg"
+        alt="BizCare ERP Software"
+        style="max-width:100%; height:auto; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:transform 300ms ease;"
+        onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';" />
+    </div>
+
+    <!-- Right: text -->
+    <div style="flex:1 1 45%; min-width:280px;">
+      <h2 style="font-size:28px; margin-bottom:16px;">BizCare – Pakistan’s No.1 ERP Software</h2>
+      <p style="font-size:16px; line-height:1.6; margin-bottom:12px;">
+        Trusted by 300+ clients, BizCare helps flour mills streamline production, inventory, sales and finance with real-time reporting and automation.
+      </p>
+      <ul style="font-size:16px; line-height:1.6; margin-left:20px; padding:0;">
+        <li>Record raw materials & monitor production output in real-time</li>
+        <li>Real-time stock & product-weight tracking</li>
+        <li>Date-wise sales & purchase reporting</li>
+        <li>Full financial control: accounts, P/L & cash flow</li>
+        <li>User access rights & function control</li>
+        <li>Detailed production & sales analytics</li>
+        <li>Employee attendance & payroll handling</li>
+        <li>Secure cloud storage & SMS alerts</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ========== WhatsApp Cloud API (crossfade) ========== -->
+  <div
+    style="position:absolute; top:0; left:0; right:0; bottom:0; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:30px;"
+    [style.opacity]="serviceSlug === 'whatsappcloudapi' ? '1' : '0'"
+    [style.transform]="serviceSlug === 'whatsappcloudapi' ? 'translateY(0px)' : 'translateY(10px)'"
+    [style.transition]="'opacity 400ms ease, transform 400ms ease'"
+    [style.pointerEvents]="serviceSlug === 'whatsappcloudapi' ? 'auto' : 'none'">
+
+    <div style="flex:1 1 45%; min-width:280px; text-align:center;">
+      <img
+        src="wca.jpg"
+        alt="WhatsApp Cloud API"
+        style="max-width:100%; height:auto; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:transform 300ms ease;"
+        onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';" />
+    </div>
+
+    <div style="flex:1 1 45%; min-width:280px;">
+      <h2 style="font-size:28px; margin-bottom:16px;">WhatsApp Cloud API – Smart Messaging for Businesses</h2>
+      <p style="font-size:16px; line-height:1.6; margin-bottom:12px;">
+        Deliver secure, automated, and scalable messaging via Meta’s cloud platform — integrate with CRM/ERP, send notifications and run chatbots.
+      </p>
+      <ul style="font-size:16px; line-height:1.6; margin-left:20px; padding:0;">
+        <li>Real-time two-way messaging & media support</li>
+        <li>Automated chatbots & support flows</li>
+        <li>Bulk notifications & transactional messages</li>
+        <li>ERP/CRM and website integrations</li>
+        <li>Multi-agent team support</li>
+        <li>Secure, scalable, pay-as-you-go cloud infra</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ========== Digital Marketing (crossfade) ========== -->
+  <div
+    style="position:absolute; top:0; left:0; right:0; bottom:0; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:30px;"
+    [style.opacity]="serviceSlug === 'digitalmarketing' ? '1' : '0'"
+    [style.transform]="serviceSlug === 'digitalmarketing' ? 'translateY(0px)' : 'translateY(10px)'"
+    [style.transition]="'opacity 400ms ease, transform 400ms ease'"
+    [style.pointerEvents]="serviceSlug === 'digitalmarketing' ? 'auto' : 'none'">
+
+    <div style="flex:1 1 45%; min-width:280px; text-align:center;">
+      <img
+        src="dm.jpg"
+        alt="Digital Marketing"
+        style="max-width:100%; height:auto; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:transform 300ms ease;"
+        onmouseover="this.style.transform='scale(1.03)';" onmouseout="this.style.transform='scale(1)';" />
+    </div>
+
+    <div style="flex:1 1 45%; min-width:280px;">
+      <h2 style="font-size:28px; margin-bottom:16px;">Digital Marketing – Reach, Engage & Grow</h2>
+      <p style="font-size:16px; line-height:1.6; margin-bottom:12px;">
+        Data-driven marketing to increase visibility, generate leads and convert customers using SEO, ads, content and analytics.
+      </p>
+      <ul style="font-size:16px; line-height:1.6; margin-left:20px; padding:0;">
+        <li>Social media & brand awareness</li>
+        <li>Search Engine Optimization (SEO)</li>
+        <li>Targeted Google & Meta ads</li>
+        <li>Email marketing & automation</li>
+        <li>Content creation & storytelling</li>
+        <li>Analytics & performance tracking</li>
+      </ul>
+    </div>
+  </div>
+</div>

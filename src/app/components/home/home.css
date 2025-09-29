@@ -1,0 +1,443 @@
+/* page reset */
+:host, html, body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Outer wrapper: centers content horizontally */
+
+
+/* Constrained centered column */
+.home-content {
+  max-width: 1100px; /* controls centered content width */
+  width: 100%;
+  padding: 0 24px;
+  text-align: center; /* center heading, buttons and clients caption */
+}
+
+/* Hero title */
+.hero-title {
+  font-size: 2.25rem; /* ~36px */
+  line-height: 1.05;
+  font-weight: 600;
+  color: #111827; /* dark gray */
+  margin: 0;
+}
+
+/* Buttons row: centered */
+.btn-row {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Generic button base */
+.btn {
+  border-radius: 30px;
+  padding: 12px 28px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+/* Outlined blue */
+.btn-outline {
+  background: transparent;
+  color: #3b82f6;
+  border: 1.2px solid #3b82f6;
+}
+.btn-outline:hover {
+  background: #3b82f6;
+  color: white;
+  border-color: transparent;
+}
+
+/* Solid brand */
+.btn-solid {
+  background: #a86a42;
+  color: white;
+  border: 1.2px solid transparent;
+}
+.btn-solid:hover {
+  background: transparent;
+  color: #a86a42;
+  border-color: #a86a42;
+}
+
+.btn-pricing {
+  border-radius: 30px;
+  padding: 12px 28px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .25s ease;
+  background: #fff;
+  color: #726f6f;
+  border: 1.2px solid #d1d5db; /* light gray border (#d1d5db ≈ Tailwind's gray-300) */
+}
+
+.btn-pricing:hover {
+  background: #000;
+  color: #fff;
+  border: 1.2px solid #d1d5db;
+}
+
+
+/* Clients section */
+.clients {
+  /* tightened so clients sits closer under hero buttons */
+  margin-top: 18px; /* was 56px — reduced but not too tight */
+  width: 100%;
+}
+
+.clients-caption {
+  color: #6b7280; /* muted gray */
+  font-size: 0.875rem;
+  margin: 6px 0 10px; /* tighten top/bottom so the list sits closer to the text */
+  text-align: center;
+}
+
+/* slightly reduce big gaps inside the track so it visually sits closer to buttons */
+.clients-track {
+  display: flex;
+  align-items: center;
+  gap: 32px; /* slightly reduced from 48px */
+  white-space: nowrap;
+  animation: scroll-left 24s linear infinite;
+  opacity: 0.9;
+}
+
+/* scrolling area */
+.clients-scroll {
+  overflow: hidden;
+  width: 100%;
+}
+
+
+
+/* single client item */
+.client-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px;
+  gap: 8px;
+}
+.client-item img {
+  height: 32px;
+  object-fit: contain;
+  display: block;
+}
+
+/* scrolling animation */
+@keyframes scroll-left {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); } /* -50% because we duplicated items */
+}
+
+/* responsiveness */
+@media (max-width: 640px) {
+  .hero-title { font-size: 1.75rem; }
+  .client-item { min-width: 100px; }
+}
+.split-section {
+  display: flex;
+  width: 100%;
+  height: 100vh; /* full screen height */
+}
+
+.split-left,
+.split-right {
+  flex: 1; /* each takes 50% */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.split-left {
+  background: #f9f9f9; /* light bg for image side */
+}
+
+.split-left img {
+  max-width: 100%;
+  height: auto;
+}
+
+.split-right {
+  background: #ffffff; /* white bg for text side */
+  text-align: left;
+}
+
+.split-right h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.split-right p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Responsive for mobile */
+@media (max-width: 900px) {
+  .split-section {
+    flex-direction: column;
+    height: auto;
+  }
+  .split-left,
+  .split-right {
+    flex: unset;
+    width: 100%;
+    text-align: center;
+  }
+  .split-right h2 {
+    font-size: 26px;
+  }
+}
+
+/* === Desktop (default) === */
+.services-top {
+  display:flex; 
+  align-items:flex-start; 
+  gap:24px; 
+  flex-wrap:wrap;
+}
+
+.services-text h2 {
+  font-size:40px; 
+  margin:0 0 12px; 
+  color:#111827;
+}
+
+.services-text p {
+  color:#6b7280; 
+  max-width:560px;
+}
+
+.mini-icons {
+  display:flex; 
+  gap:12px; 
+  overflow-x:auto;
+}
+
+.mini-icon {
+  flex:0 0 auto; 
+  width:48px; height:48px; 
+  border-radius:10px; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  color:#fff; 
+  font-size:18px; 
+  font-weight:700; 
+  cursor:pointer; 
+  transition:0.2s;
+}
+
+.services-card {
+  position:relative; 
+  margin-top:30px; 
+  display:flex; 
+  justify-content:center;
+}
+
+.card-content {
+  width:100%; 
+  max-width:980px; 
+  display:flex; 
+  gap:28px; 
+  padding:28px; 
+  border-radius:14px; 
+  background:#fff; 
+  box-shadow:0 8px 40px rgba(10,10,10,0.06);
+}
+
+.card-left { flex:0 0 46%; min-width:260px; }
+.card-right { flex:1 1 40%; min-width:220px; }
+
+.icon-row { display:flex; gap:16px; align-items:center; margin-bottom:12px; }
+.big-icon { width:64px; height:64px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:28px; color:#fff; }
+
+.learn-btn {
+  margin-top:8px; 
+  padding:8px 14px; 
+  border-radius:16px; 
+  border:1px solid currentColor; 
+  background:transparent; 
+  color:rgba(0,0,0,0.6); 
+  cursor:pointer;
+}
+
+.card-right ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
+.card-right li { display:flex; gap:10px; color:#374151; }
+
+/* nav buttons */
+.nav-btn {
+  position:absolute; 
+  top:50%; 
+  transform:translateY(-50%); 
+  width:40px; height:40px; 
+  border-radius:999px; 
+  border:1px solid rgba(0,0,0,0.08); 
+  background:#fff; 
+  cursor:pointer; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center;
+}
+.prev { left:-36px; }
+.next { right:-36px; }
+
+/* === Tablet & Mobile Adjustments === */
+@media (max-width: 768px) {
+  .card-content {
+    flex-direction:column;
+    padding:20px;
+  }
+  .card-left, .card-right {
+    flex:1 1 100%;
+    min-width:100%;
+  }
+  .services-text h2 {
+    font-size:28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mini-icon { width:40px; height:40px; font-size:16px; }
+  .big-icon { width:52px; height:52px; font-size:24px; }
+  .learn-btn { font-size:13px; padding:6px 12px; }
+}
+/* === Mobile only (≤480px) === */
+@media (max-width: 480px) {
+  .card-content {
+    max-width: 95%;   /* reduce width */
+    padding: 16px;    /* tighter padding */
+    border-radius: 10px; 
+  }
+
+  .card-left p {
+    font-size: 13px;  /* smaller text */
+  }
+
+  .card-right li {
+    font-size: 13px;
+  }
+
+  .big-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 22px;
+  }
+}
+/* Target the card */
+.scroller .apps-track > div {
+  position: relative;
+}
+
+/* Fade in overlay on hover */
+.scroller .apps-track > div:hover .overlay {
+  opacity: 1;
+}
+
+/* page reset */
+:host, html, body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Target the card */
+.scroller .apps-track > div {
+  position: relative;
+}
+
+/* Overlay defaults */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none; /* prevent blocking clicks when hidden */
+}
+
+/* Hover effect */
+.scroller .apps-track > div:hover .overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ===== your existing CSS continues ===== */
+.home-content {
+  max-width: 1100px;
+  width: 100%;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 2.25rem;
+  line-height: 1.05;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+/* Overlay defaults */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.scroller .apps-track > div:hover .overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Top-left city name */
+.overlay-city {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Center icon */
+.overlay-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Bottom text */
+.overlay-footer {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #f3f4f6;
+  font-size: 16px;
+  text-align: center;
+}
+
