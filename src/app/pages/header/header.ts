@@ -1,11 +1,11 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
+import { EmailModalComponent } from '../../shared/email-modal/email-modal';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+imports: [CommonModule, EmailModalComponent],
   templateUrl: './header.html',
   styleUrls: ['./header.css']
 })
@@ -42,20 +42,8 @@ export class Header {
   toggleModal(state: boolean): void {
     this.showModal = state;
   }
-  closeModal(): void {
-    this.showModal = false;
-  }
-  openModal(): void {
-    this.showModal = true;
-  }
 
-  /** Sidebar controls */
-  toggleMobileMenu(): void {
-    this.mobileMenu = !this.mobileMenu;
-  }
-  toggleMobileServices(): void {
-    this.mobileServices = !this.mobileServices;
-  }
+
 
   /** Hover effects for CTA button */
   onHover(event: Event): void {
@@ -87,4 +75,31 @@ export class Header {
   ngOnInit(): void {
     this.onResize();
   }
+
+
+
+
+
+  toggleMobileMenu() {
+    this.mobileMenu = !this.mobileMenu;
+  }
+
+  toggleMobileServices() {
+    this.mobileServices = !this.mobileServices;
+  }
+
+  openModal() {
+    this.showModal = true;
+    this.mobileMenu = false;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
+  goBack() {
+    history.back();
+  }
+
+
 }

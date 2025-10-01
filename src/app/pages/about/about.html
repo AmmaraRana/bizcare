@@ -32,36 +32,9 @@
   </div>
 </section>
 
-<!-- ====== CORE VALUES ====== -->
-<!-- <section class="values-section fade-up">
-  <h2 class="section-title">Core Values</h2>
-  <div class="values-grid">
-    <div class="value-card" *ngFor="let value of values; let i=index"
-         [ngStyle]="{'animation-delay': (i * 0.2) + 's'}">
-      <div class="value-icon">
-        <img src="assets/images/value-placeholder.jpg" alt="Value Icon">
-      </div>
-      <h3>{{ value.title }}</h3>
-      <p>{{ value.desc }}</p>
-    </div>
-  </div>
-</section> -->
-
-<!-- ====== HOW WE WORK ====== -->
-<!-- <section class="process-section fade-up alt-bg">
-  <h2 class="section-title">How We Work</h2>
-  <div class="process-steps">
-    <div class="step-card" *ngFor="let step of steps; let i=index"
-         [ngStyle]="{'animation-delay': (i * 0.2) + 's'}">
-      <div class="step-number">{{ i+1 }}</div>
-      <h3>{{ step.title }}</h3>
-      <p>{{ step.desc }}</p>
-    </div>
-  </div>
-</section> -->
 
 <!-- ====== TEAM  ====== -->
-<section style="padding:60px 20px; font-family:Arial, sans-serif;">
+<section style="padding-bottom: 20px; font-family:Arial, sans-serif;">
   <div class="team-grid">
     <div *ngFor="let member of team; let i = index" 
          class="team-card"
@@ -69,11 +42,8 @@
          [class.last-single]="i === team.length - 1 && team.length % 3 === 1">
 
       <!-- Image -->
-      <div style="overflow:hidden;">
-        <img [src]="member.image" [alt]="member.name" 
-             style="width:100%; height:360px; object-fit:cover; transition:transform .5s ease;"
-             onmouseover="this.style.transform='scale(1.1)';" 
-             onmouseout="this.style.transform='scale(1)';">
+      <div style="overflow:hidden; flex:1;">
+        <img [src]="member.image" [alt]="member.name">
       </div>
 
       <!-- Bottom details -->
@@ -93,3 +63,4 @@
     </div>
   </div>
 </section>
+

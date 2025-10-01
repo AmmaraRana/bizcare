@@ -1,0 +1,55 @@
+<div class="modal-overlay" *ngIf="isOpen">
+  <div class="modal-content">
+    <h2 style="margin-bottom:10px; font-size:22px; color:#111; text-align:center;">
+      {{ subject }}
+    </h2>
+    <p style="margin-bottom:20px; font-size:14px; color:#555; text-align:center;">
+      Fill in your details and we’ll reach out shortly.
+    </p>
+
+    <form (ngSubmit)="sendEmail()">
+      <input type="text" [(ngModel)]="formData.name" name="name"
+             placeholder="Your Name" style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
+
+      <input type="email" [(ngModel)]="formData.email" name="email"
+             placeholder="Your Email" style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
+
+      <select [(ngModel)]="formData.budget" name="budget"
+              style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px; font-size:14px;">
+        <option value="" disabled selected>Budget Range</option>
+        <option>Under $1,000</option>
+        <option>$1,000 – $5,000</option>
+        <option>$5,000 – $10,000</option>
+        <option>Above $10,000</option>
+      </select>
+
+      <select [(ngModel)]="formData.service" name="service"
+              style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px; font-size:14px;">
+        <option value="" disabled selected>Services Required</option>
+        <option>ERP System</option>
+        <option>Accounting / Inventory / POS</option>
+        <option>WhatsApp Cloud API Integration</option>
+        <option>Digital Marketing</option>
+        <option>E-Commerce Solutions</option>
+        <option>Hardware & Installation Support</option>
+        <option>After-Sales & Maintenance</option>
+        <option>Other</option>
+      </select>
+
+      <textarea [(ngModel)]="formData.message" name="message"
+                placeholder="Tell us more about your project..."
+                style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; font-size:14px; height:90px; resize:none;"></textarea>
+
+      <div style="display:flex; justify-content:space-between; gap:10px;">
+        <button type="button" (click)="onCancel()"
+                style="flex:1; background:#f5f5f5; border:none; padding:12px; border-radius:9999px; cursor:pointer; font-size:14px;">
+          Cancel
+        </button>
+        <button type="submit"
+                style="flex:1; background:#a86a42; color:white; border:none; padding:12px; border-radius:9999px; cursor:pointer; font-size:14px;">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

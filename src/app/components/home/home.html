@@ -1,16 +1,16 @@
 <style>
   /* scroller basics (in-file) */
-  .scroller { overflow: hidden; box-sizing: border-box; width: 100%; }
+  .scroller { overflow: hidden; box-sizing: border-box; scroll-behavior: smooth; width: 100%; }
   .track { display:flex; gap:12px; align-items:center; white-space:nowrap; box-sizing:border-box; }
   .clients-track { animation: scroll-left 18s linear infinite; }
   .apps-track { animation: scroll-right 20s linear infinite; }
   /* pause on hover */
   .scroller:hover .clients-track,
   .scroller:hover .apps-track { animation-play-state: paused; }
-  /* keyframes: clients move right->left (content goes left), apps move left->right (content goes right) */
+ 
   @keyframes scroll-left {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* duplicate content => -50% loops */
+    100% { transform: translateX(-50%); } 
   }
   @keyframes scroll-right {
     0% { transform: translateX(-50%); }
@@ -24,95 +24,168 @@
 
 <div style="min-height:calc(100vh - 200px);display:flex;flex-direction:column;justify-content:flex-start;align-items:center;padding-top:36px;width:100%;box-sizing:border-box;margin:0;height:auto;position:relative;overflow:hidden;">
 
-  <!-- Left Floating Image -->
-  <img src="/left.png" 
-       alt="Left Image"
-       style="position:absolute;left:0;top:20%;transform:translateY(-50%);animation:floatY 4s ease-in-out infinite;max-height:80%;object-fit:cover;" />
+<style>
+  @keyframes floatY {
+    0%, 100% { transform: translateY(-50%) translateY(0); }
+    50% { transform: translateY(-50%) translateY(-20px); }
+  }
 
-  <!-- Right Floating Image -->
-  <img src="/right.png" 
-       alt="Right Image"
-       style="position:absolute;right:0;top:25%;transform:translateY(-50%);animation:floatY 4s ease-in-out infinite;max-height:80%;object-fit:cover;" />
+  .floating-img {
+    position: absolute;
+    height: auto;
+    object-fit: contain;
+    animation: floatY 4s ease-in-out infinite;
+  }
+
+  .left-img {
+    left: 0;
+    top: 24%; /* lowered a bit */
+  }
+
+  .right-img {
+    right: 0;
+    top: 15%;
+  }
+
+  /* Large desktops - fixed size */
+  @media (min-width: 1200px) {
+    .floating-img {
+      width: 180px; /* default size */
+    }
+    .left-img {
+      width: 150px; /* smaller left image */
+    }
+  }
+
+  /* Mid screens (tablets/laptops) - responsive scaling */
+  @media (min-width: 600px) and (max-width: 1199px) {
+    .floating-img {
+      width: 18vw; 
+      max-width: 180px;
+      min-width: 120px;
+    }
+    .left-img {
+      width: 15vw;  
+      max-width: 150px;
+      min-width: 100px;
+    }
+  }
+
+  @media (max-width: 599px) {
+    .floating-img {
+      width: 100px;
+    }
+    .left-img {
+      width: 80px;
+    }
+  }
+</style>
+
+<!-- Left Floating Image -->
+<img src="/left.png" alt="Left Image" class="floating-img left-img" />
+
+<!-- Right Floating Image -->
+<img src="/right.png" alt="Right Image" class="floating-img right-img" />
+
+
 
   <div style="max-width:1100px;width:100%;padding:0 24px;text-align:center;z-index:2;">
     <!-- Heading -->
-    <h1 style="font-family:'Montserrat', sans-serif; font-size:2.75rem; line-height:1.4; font-weight:700; color:#111827; margin:0;">
-      Empowering the Business with 
-      <br />
-      Smart Software Solutions
-    </h1>
+<h1
+  style="font-family:'Montserrat', sans-serif; line-height:1.3; font-weight:700; color:#111827; margin:0; text-align:center;"
+  [style.fontSize]="headingFontSize">
+  Empowering the Business with <br />
+  Smart Software Solutions
+</h1>
 
-    <!-- Buttons -->
-  <div style="margin-top:16px; margin-bottom:150px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+
+
+   
+<style>
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap; /* keep text in one line */
+    font-weight: 500;
+    border-radius: 30px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    padding: 0 28px; /* horizontal padding */
+  }
+
+  /* First button - gray bordered */
+  .btn-pricing {
+    background: #fff;
+    color: #444;
+    border: 1.2px solid #dddcdc; /* gray border */
+  }
+  .btn-pricing:hover {
+    background: #444;
+    color: #fff;
+  }
+
+  /* Second button - filled brown */
+  .btn-consult {
+    background: #a86a42;
+    color: white;
+    border: 1.2px solid transparent;
+    gap: 10px;
+  }
+  .btn-consult:hover {
+    background: #fff;
+    color: #a86a42;
+    border: 1.2px solid #a86a42;
+  }
+
+  /* Large desktops - fixed size */
+  @media (min-width: 1200px) {
+    .btn {
+      min-width: 220px;
+      height: 54px;
+      font-size: 16px;
+    }
+  }
+
+  /* Mid screens (tablets/laptops) - flexible scaling */
+  @media (min-width: 600px) and (max-width: 1199px) {
+    .btn {
+      min-width: 20vw;
+      height: 50px;
+      font-size: 15px;
+      max-width: 260px;
+    }
+  }
+
+  /* Small mobiles - fixed size */
+  @media (max-width: 599px) {
+    .btn {
+      min-width: 160px;
+      height: 46px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<!-- Buttons -->
+<div style="margin-top:16px; margin-bottom:150px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+  
+  <!-- First button -->
   <button class="btn btn-pricing" routerLink="/pricing">
     View Plans & Pricing
   </button>
 
-
-    <!-- Button -->
-<button
-  style="border-radius:30px; padding:12px 28px; font-weight:500; cursor:pointer; transition:all .25s ease; background:#a86a42; color:white; border:1.2px solid transparent; display:flex; align-items:center; gap:10px;"
-  onmouseover="this.style.backgroundColor='white'; this.style.color='#a86a42'; this.style.border='1.2px solid #a86a42'; this.querySelector('svg').style.fill='#a86a42';"
-  onmouseout="this.style.backgroundColor='#a86a42'; this.style.color='white'; this.style.border='1.2px solid transparent'; this.querySelector('svg').style.fill='white';"
-  onclick="document.getElementById('myModal').style.display='flex';"
->
-  Request a Consultation
-
+  <!-- Second button -->
+<button class="btn btn-consult" (click)="modalOpen = true">
+  Request Consultation
 </button>
 
-<!-- Modal -->
-<div id="myModal" 
-     style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
-            background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:1000;">
-  
-  <div style="background:white; padding:30px; border-radius:16px; width:100%; max-width:450px; 
-              box-shadow:0 6px 20px rgba(0,0,0,0.3); font-family:Arial, sans-serif;">
+<app-email-modal
+  [isOpen]="modalOpen"
+  (close)="modalOpen = false">
+</app-email-modal>
 
-    <h2 style="margin-bottom:10px; font-size:22px; color:#111; text-align:center;">
-      Let’s Work Together
-    </h2>
-    <p style="margin-bottom:20px; font-size:14px; color:#555; text-align:center;">
-      Fill in your details and we’ll reach out shortly.
-    </p>
 
-    <form>
-      <input type="text" placeholder="Your Name" style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
-      <input type="email" placeholder="Your Email" style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px; font-size:14px;" />
-
-      <select style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px; font-size:14px;">
-        <option value="" disabled selected>Budget Range</option>
-        <option>Under $1,000</option>
-        <option>$1,000 – $5,000</option>
-        <option>$5,000 – $10,000</option>
-        <option>Above $10,000</option>
-      </select>
-
-      <select style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; border-radius:8px; font-size:14px;">
-        <option value="" disabled selected>Services Required</option>
-        <option>ERP System</option>
-        <option>Accounting / Inventory / POS</option>
-        <option>WhatsApp Cloud API Integration</option>
-        <option>Digital Marketing</option>
-        <option>E-Commerce Solutions</option>
-        <option>Hardware & Installation Support</option>
-        <option>After-Sales & Maintenance</option>
-        <option>Other</option>
-      </select>
-
-      <textarea placeholder="Tell us more about your project..." style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; border-radius:8px; font-size:14px; height:90px; resize:none;"></textarea>
-
-      <div style="display:flex; justify-content:space-between; gap:10px;">
-        <button type="button" onclick="document.getElementById('myModal').style.display='none';" 
-                style="flex:1; background:#f5f5f5; border:none; padding:12px; border-radius:9999px; cursor:pointer; font-size:14px;">
-          Cancel
-        </button>
-        <button type="submit" style="flex:1; background:#a86a42; color:white; border:none; padding:12px; border-radius:9999px; cursor:pointer; font-size:14px;">
-          Submit
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
 
     </div>
 
@@ -163,51 +236,71 @@
 
 
 <!-- Portfolio Section -->
-<div class="scroller" style="padding:20px 0; overflow-x:auto; white-space:nowrap;">
-  <div class="apps-track track" style="display:flex; gap:24px;">
+<div class="scroller" style="overflow-x:auto; white-space:nowrap;">
+  <div class="apps-track track">
 
     <!-- Dynamic Portfolio Card -->
-    <div *ngFor="let project of projects"
-         (click)="goToPortfolio(project.city)"
-         style="flex:0 0 auto; width:320px; height:480px; border-radius:18px; overflow:hidden; position:relative; box-shadow:0 4px 12px rgba(0,0,0,0.2); cursor:pointer;">
-
-      <!-- Project Image -->
+    <div *ngFor="let project of projects" class="portfolio-card">
       <img [src]="project.image" [alt]="project.city"
-           (error)="onImgError($event)"
-           style="width:100%; height:100%; object-fit:cover; display:block;">
-
-      <!-- Overlay with structured layout -->
-      <div class="overlay">
-        <!-- City name (top-left) -->
-        <div class="overlay-city">
-          {{ project.city }}
-        </div>
-
-        <!-- Center link icon -->
-        <div class="overlay-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" viewBox="0 0 24 24">
-            <path d="M10.59 13.41a1 1 0 0 0 1.41 1.41l5-5a1 1 0 0 0-1.41-1.41l-5 5zm-5.18-1.82a5.001 5.001 0 0 0 7.07 7.07l1.42-1.42a1 1 0 0 0-1.42-1.42l-1.42 1.42a3 3 0 1 1-4.24-4.24l1.42-1.42a1 1 0 0 0-1.42-1.42l-1.42 1.42zM18.36 5.64a5.001 5.001 0 0 0-7.07 0l-1.42 1.42a1 1 0 0 0 1.42 1.42l1.42-1.42a3 3 0 1 1 4.24 4.24l-1.42 1.42a1 1 0 1 0 1.42 1.42l1.42-1.42a5.001 5.001 0 0 0 0-7.07z"/>
-          </svg>
-        </div>
-
-        <!-- Bottom text -->
-        <div class="overlay-footer">
-          View our client in {{ project.city }}
-        </div>
-      </div>
+           (error)="onImgError($event)" class="portfolio-img">
     </div>
 
   </div>
 </div>
 
-
-
 <style>
-  /* hover effect */
-  .apps-track > div:hover .overlay {
-    opacity: 1;
+  .scroller {
+    padding: 10px 0; /* reduced vertical padding, removed side padding */
+  }
+
+  .apps-track {
+    display: flex;
+    gap: 12px; /* reduced gap between images */
+    padding: 0 8px; /* small inner padding so first/last image isn’t cut */
+  }
+
+  .portfolio-card {
+    flex: 0 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    background: #000;
+    transition: all 0.3s ease;
+  }
+
+  .portfolio-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Desktop */
+  @media (min-width: 1200px) {
+    .portfolio-card {
+      width: 300px;
+      height: 440px;
+    }
+  }
+
+  /* Tablets */
+  @media (min-width: 600px) and (max-width: 1199px) {
+    .portfolio-card {
+      width: 240px;
+      height: 360px;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 599px) {
+    .portfolio-card {
+      width: 180px;
+      height: 280px;
+    }
   }
 </style>
+
+
 
   </div>
 </div>
@@ -228,17 +321,16 @@
 
 
 
-<!-- Journey Section -->
+
 <section style="display:flex;flex-wrap:wrap;width:100%;min-height:100vh;box-sizing:border-box;">
 
-  <!-- Left: Illustration -->
+ 
   <div style="flex:1 1 50%;display:flex;justify-content:center;align-items:center;
               padding:40px;box-sizing:border-box;">
     <img src="commitment.png" alt="Journey Illustration" 
          style="max-width:100%;height:auto;object-fit:contain;" />
   </div>
 
-  <!-- Right: Text -->
   <div style="flex:1 1 50%;display:flex;flex-direction:column;justify-content:center;
               align-items:flex-start;padding:40px;text-align:left;box-sizing:border-box;">
     <h2 style="font-size:32px;font-weight:bold;margin-bottom:20px;">
@@ -266,72 +358,164 @@
   </div>
 
 </section>
-<section style="background:#dfdfe2; padding:60px 20px; text-align:center;">
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:20px; max-width:1000px; margin:0 auto;">
+<section class="stats-section">
+  <div class="stats-wrapper">
 
     <!-- Happy Clients -->
-    <div style="background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.08); display:flex; align-items:center; justify-content:center; gap:15px;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" viewBox="0 0 24 24">
-        <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
-      </svg>
-      <div>
-        <h2 style="font-size:28px; margin:0;" id="clients">{{ clients }}</h2>
-        <p style="color:#555; margin:0;">Happy Clients</p>
+    <div class="stat-card">
+      <div class="stat-left">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stat-icon" viewBox="0 0 24 24">
+          <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+        </svg>
+      </div>
+      <div class="stat-right">
+        <h2 class="stat-number" id="clients">{{ clients }}</h2>
+        <p class="stat-label">Happy Clients</p>
       </div>
     </div>
 
     <!-- Years of Excellence -->
-    <div style="background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.08); display:flex; align-items:center; justify-content:center; gap:15px;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" viewBox="0 0 24 24">
-        <path d="M3 3h18v2H3V3zm2 4h14v14H5V7zm2 2v10h10V9H7z"/>
-      </svg>
-      <div>
-        <h2 style="font-size:28px; margin:0;" id="years">{{ years }}</h2>
-        <p style="color:#555; margin:0;">Years of Excellence</p>
+    <div class="stat-card">
+      <div class="stat-left">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stat-icon" viewBox="0 0 24 24">
+          <path d="M3 3h18v2H3V3zm2 4h14v14H5V7zm2 2v10h10V9H7z"/>
+        </svg>
+      </div>
+      <div class="stat-right">
+        <h2 class="stat-number" id="years">{{ years }}</h2>
+        <p class="stat-label">Years of Excellence</p>
       </div>
     </div>
 
     <!-- Hours of Support -->
-    <div style="background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.08); display:flex; align-items:center; justify-content:center; gap:15px;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" viewBox="0 0 24 24">
-        <path d="M12 1a11 11 0 1 0 0 22 11 11 0 1 0 0-22zm1 11h6v2h-8V6h2v6z"/>
-      </svg>
-      <div>
-        <h2 style="font-size:28px; margin:0;" id="support">{{ support }}</h2>
-        <p style="color:#555; margin:0;">Hours of Support</p>
+    <div class="stat-card">
+      <div class="stat-left">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stat-icon" viewBox="0 0 24 24">
+          <path d="M12 1a11 11 0 1 0 0 22 11 11 0 1 0 0-22zm1 11h6v2h-8V6h2v6z"/>
+        </svg>
+      </div>
+      <div class="stat-right">
+        <h2 class="stat-number" id="support">{{ support }}</h2>
+        <p class="stat-label">Hours of Support</p>
       </div>
     </div>
 
     <!-- Cities Covered -->
-    <div style="background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.08); display:flex; align-items:center; justify-content:center; gap:15px;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="black" viewBox="0 0 24 24">
-        <path d="M12 2C8.1 2 5 5.1 5 9c0 5.3 7 13 7 13s7-7.7 7-13c0-3.9-3.1-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/>
-      </svg>
-      <div>
-        <h2 style="font-size:28px; margin:0;" id="cities">{{ cities }}</h2>
-        <p style="color:#555; margin:0;">Cities Covered</p>
+    <div class="stat-card">
+      <div class="stat-left">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stat-icon" viewBox="0 0 24 24">
+          <path d="M12 2C8.1 2 5 5.1 5 9c0 5.3 7 13 7 13s7-7.7 7-13c0-3.9-3.1-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/>
+        </svg>
+      </div>
+      <div class="stat-right">
+        <h2 class="stat-number" id="cities">{{ cities }}</h2>
+        <p class="stat-label">Cities Covered</p>
       </div>
     </div>
 
   </div>
 </section>
 
-
 <style>
-  /* Mobile and small screens: stack vertically */
-  @media (max-width: 767px) {
-    section {
-      flex-direction: column;
+  .stats-section {
+    background: #f5f5f7;
+    padding: 30px 0; 
+    display: flex;
+    justify-content: center;
+  }
+
+  .stats-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .stat-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 16px;
+    min-height: 82px;
+  }
+
+  .stat-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stat-right {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .stat-icon {
+    width: clamp(22px, 2.4vw, 30px);
+    height: clamp(22px, 2.4vw, 30px);
+    fill: black;
+  }
+
+  .stat-number {
+    font-size: clamp(14px, 2vw, 20px);
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    color: #555;
+    margin: 0;
+    font-size: clamp(11px, 1.5vw, 13px);
+    line-height: 1.2;
+  }
+
+  /* Tablet */
+  @media (max-width: 768px) {
+    .stats-wrapper {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 95%; 
     }
-    section > div {
-      flex: 1 1 100% !important;
-      padding: 20px !important;
+    .stats-section {
+      padding: 22px 0;
     }
-    section img {
-      max-height: 250px; /* keep image smaller on phones */
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .stats-wrapper {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      max-width: 100%;
+    }
+    .stats-section {
+      padding: 16px 0;
+    }
+    .stat-card {
+      padding: 10px 12px;
+      gap: 8px;
+    }
+    .stat-icon {
+      width: 20px;
+      height: 20px;
+    }
+    .stat-number {
+      font-size: 13px;
+    }
+    .stat-label {
+      font-size: 11px;
     }
   }
 </style>
+
 <section id="services" style="padding:48px 20px;">
   <div style="max-width:1100px; margin:0 auto; box-sizing:border-box;">
 
@@ -431,20 +615,16 @@
       that streamline operations and boost efficiency across industries.
     </p>
 
-    <!-- Modules / Solutions row -->
-    <div style="display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:40px; margin-bottom:60px;">
+    <!-- Modules / Solutions grid -->
+    <div class="modules-grid">
       <ng-container *ngFor="let m of modules">
-        <div style="display:flex; align-items:center; flex-direction:column; width:120px;">
-          <!-- icon holder (no background) -->
-          <div style="width:72px; height:72px; display:flex; align-items:center; justify-content:center;">
-            <!-- render sanitized SVG -->
-            <div [innerHTML]="m.svg" style="width:40px; height:40px; display:inline-flex;"></div>
+        <div class="module-card">
+          <!-- icon holder -->
+          <div class="icon-holder">
+            <div [innerHTML]="m.svg" class="icon"></div>
           </div>
-
           <!-- module name -->
-          <span style="font-size:15px; font-weight:500; color:#111827; text-align:center; margin-top:6px;">
-            {{ m.name }}
-          </span>
+          <span class="module-name">{{ m.name }}</span>
         </div>
       </ng-container>
     </div>

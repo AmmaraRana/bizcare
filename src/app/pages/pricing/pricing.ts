@@ -1,10 +1,10 @@
 import { Component, QueryList, ViewChildren, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { EmailModalComponent } from '../../shared/email-modal/email-modal';
 @Component({
   selector: 'app-pricing',
   standalone: true,
-  imports: [CommonModule],
+ imports: [CommonModule, EmailModalComponent],
   styleUrl: './pricing.css',
 
   templateUrl: './pricing.html',
@@ -18,7 +18,15 @@ export class Pricing implements AfterViewInit {
     { q: 'Do you offer one-time licensing or subscription plans?', a: 'Yes, BizCare offers both one-time licensing and flexible SaaS subscription packages.' },
     { q: 'What kind of support does BizCare provide?', a: 'We provide 24/7 technical support, on-site training, and continuous system upgrades.' }
   ];
+  isEmailModalOpen = false;
 
+  openModal() {
+    this.isEmailModalOpen = true;
+  }
+
+  closeModal() {
+    this.isEmailModalOpen = false;
+  }
   faqAnswerHeight: number[] = [];
 
   @ViewChildren('faqContent') faqContents!: QueryList<ElementRef>;

@@ -1,17 +1,19 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,HostListener,OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { EmailModalComponent } from '../../shared/email-modal/email-modal';
 @Component({
   selector: 'app-home',
   templateUrl: './home.html',
-  
+
     imports: [
     CommonModule  ,
     RouterLink
+    , EmailModalComponent
   ],
    animations: [
     trigger('cardAnimation', [
@@ -42,7 +44,7 @@ hoverIndex: number | null = null;
   next() {
     this.currentIndex = (this.currentIndex + 1) % this.services.length;
   }
-
+modalOpen = false;
 services = [
   {
     title: 'Enterprise ERP',
@@ -184,23 +186,115 @@ modules: { name: string; svg: SafeHtml }[] = [];
     return this.services[this.currentIndex];
   }
 projects = [
-  { image: '/isb.jpg', city: 'Islamabad' },
-  { image: '/lhr.jpg', city: 'Lahore' },
-  { image: '/gj.jpg', city: 'Gujranwala' },
-  { image: '/fsd.jpg', city: 'Faisalabad' },
-  { image: '/multan.jpeg', city: 'Multan' },
-  { image: '/sargodha.jpg', city: 'Sargodha' },
-  { image: '/sahiwal.jpg', city: 'Sahiwal' },
-  { image: '/gujrat.jpg', city: 'Gujrat' },
-  { image: '/bahawalpur.jpg', city: 'Bahawalpur' },
-  { image: '/malakand.jpg', city: 'Malakand' },
-  { image: '/pesh.jpg', city: 'Peshawar' },
-  { image: '/dgk.jpg', city: 'D.G. Khan' },
-  { image: '/sindh.jpg', city: 'Sindh' },
-  { image: '/balochistan.jpg', city: 'Balochistan' },
-  { image: '/dik.jpg', city: 'D.I. Khan' }
-];
+  { image: '/bizcared.jpg', city: 'Islamabad' },
+  { image: '/whatssapp-service.jpg', city: 'Lahore' },
+  { image: '/digital-marketing-service.jpg', city: 'Gujranwala' },
+  { image: '/business-service.jpg', city: 'Faisalabad' },
+  { image: '/creation.jpg', city: 'Multan' },
+  { image: '/about.jpg', city: 'Sargodha' },
+  { image: '/vision.png', city: 'Sahiwal' },
 
+];
+headingFontSize: string = '44px'; 
+
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.adjustFontSize();
+    this.updateModalStyles();
+  }
+ updateModalStyles() {
+    const width = window.innerWidth;
+
+    // Adjust modal container
+    const modalPadding = width < 768 ? 16 : 30;
+    const modalMaxWidth = width < 768 ? width - 40 : 450;
+    const headingFont = width < 768 ? 18 : 22;
+    const paragraphFont = width < 768 ? 12 : 14;
+    const inputFont = width < 768 ? 12 : 14;
+    const inputPadding = width < 768 ? 8 : 12;
+    const buttonFont = width < 768 ? 12 : 14;
+    const buttonPadding = width < 768 ? 8 : 12;
+    const textareaHeight = width < 768 ? 70 : 90;
+
+    this.modalStyles = {
+      container: {
+        background: 'white',
+        padding: modalPadding + 'px',
+        borderRadius: '16px',
+        width: '100%',
+        maxWidth: modalMaxWidth + 'px',
+        boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
+        fontFamily: 'Arial, sans-serif',
+      },
+      heading: {
+        marginBottom: '10px',
+        fontSize: headingFont + 'px',
+        color: '#111',
+        textAlign: 'center',
+      },
+      paragraph: {
+        marginBottom: '20px',
+        fontSize: paragraphFont + 'px',
+        color: '#555',
+        textAlign: 'center',
+      },
+      input: {
+        width: '100%',
+        padding: inputPadding + 'px',
+        marginBottom: '12px',
+        border: '1px solid #ddd',
+        borderRadius: '8px',
+        fontSize: inputFont + 'px',
+      },
+      select: {
+        width: '100%',
+        padding: inputPadding + 'px',
+        marginBottom: '12px',
+        border: '1px solid #ddd',
+        borderRadius: '8px',
+        fontSize: inputFont + 'px',
+      },
+      textarea: {
+        width: '100%',
+        padding: inputPadding + 'px',
+        marginBottom: '15px',
+        border: '1px solid #ddd',
+        borderRadius: '8px',
+        fontSize: inputFont + 'px',
+        height: textareaHeight + 'px',
+        resize: 'none',
+      },
+      cancelButton: {
+        flex: '1',
+        background: '#f5f5f5',
+        border: 'none',
+        padding: buttonPadding + 'px',
+        borderRadius: '9999px',
+        cursor: 'pointer',
+        fontSize: buttonFont + 'px',
+      },
+      submitButton: {
+        flex: '1',
+        background: '#a86a42',
+        color: 'white',
+        border: 'none',
+        padding: buttonPadding + 'px',
+        borderRadius: '9999px',
+        cursor: 'pointer',
+        fontSize: buttonFont + 'px',
+      },
+    };
+  }
+  adjustFontSize() {
+    const containerWidth = window.innerWidth - 48;    
+    // Target max two lines: adjust this factor if needed
+    let newFontSize = containerWidth / 20; // experiment with divisor
+    if (newFontSize > 44) newFontSize = 44; // max desktop font
+    if (newFontSize < 22) newFontSize = 22; // min mobile font
+
+    this.headingFontSize = newFontSize + 'px';
+  }
 
 onImgError(event: Event) {
   const target = event.target as HTMLImageElement;
@@ -227,11 +321,7 @@ logos = [
   { image: 'biz4.svg', name: 'OilMate' },
   { image: 'biz5.svg', name: 'BizPos' },
   { image: 'biz6.svg', name: 'Restro' },
-  // { image: 'assets/logos/flutter.png', name: 'Flutter' },
-  // { image: 'assets/logos/aws.png', name: 'AWS' },
-  // { image: 'assets/logos/docker.png', name: 'Docker' },
-  // { image: 'assets/logos/mongodb.png', name: 'MongoDB' },
-  // { image: 'assets/logos/mysql.png', name: 'MySQL' }
+
 ];
  creationImage: string = '/creation.jpg';
   clients: number = 0;
@@ -239,7 +329,12 @@ logos = [
   support: number = 0;
   cities: number = 0;
 
+  modalStyles: any = {};
+
+
   ngOnInit() {
+  this.adjustFontSize();
+  this.updateModalStyles();
     this.animateValue('clients', 0, 280, 5000);
     this.animateValue('years', 0, 7, 5000);
     this.animateValue('support', 0, 20440, 5000);
