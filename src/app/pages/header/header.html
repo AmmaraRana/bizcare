@@ -1,23 +1,95 @@
-
 <header class="responsive-header">
 
   <!-- Desktop Navigation -->
   <nav *ngIf="!isMobile" class="desktop-nav"
        style="display:flex; gap:24px; font-size:16px; font-weight:500; color:#374151; position:relative;">
-    <a href="/services" style="text-decoration:none; color:#374151;">Services</a>
+
+    <!-- Desktop Services Dropdown -->
+    <div style="position:relative;">
+ <!-- Services Menu -->
+<div class="services-wrapper"
+     (mouseenter)="openServices()"
+     (mouseleave)="closeServices()"
+     style="position:relative; display:inline-block;">
+
+  <div style="cursor:pointer; display:flex; align-items:center; gap:6px; color:#374151;">
+    Services
+    <svg xmlns="http://www.w3.org/2000/svg" 
+         [style.transform]="mobileServices ? 'rotate(180deg)' : 'rotate(0deg)'" 
+         style="width:14px; height:14px; stroke:#374151; transition:transform 0.3s;" 
+         fill="none" viewBox="0 0 24 24" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/>
+    </svg>
+  </div>
+
+  <!-- Dropdown -->
+  <div *ngIf="mobileServices" 
+       style="position:absolute; top:100%; left:0; background:white; 
+              box-shadow:0 4px 12px rgba(0,0,0,0.15); border-radius:8px; 
+              padding:8px; z-index:100; display:inline-block;">
+
+    <!-- First row -->
+    <div style="display:flex; gap:10px; margin-bottom:8px;">
+      <!-- BizCare ERP -->
+      <div style="width:42px; height:42px; display:flex; align-items:center; justify-content:center; 
+                  background:#a0522d; border-radius:8px; cursor:pointer; 
+                  transition:transform 0.2s ease;" 
+           (click)="goToService('BizCare ERP')" 
+           onmouseover="this.style.transform='scale(1.15)';" 
+           onmouseout="this.style.transform='scale(1)';">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
+             width="20" height="20" fill="white">
+          <path d="M12 2L2 7h20L12 2zM2 9v11h20V9H2z"/>
+        </svg>
+      </div>
+
+      <!-- WhatsApp -->
+      <div style="width:42px; height:42px; display:flex; align-items:center; justify-content:center; 
+                  background:#a0522d; border-radius:8px; cursor:pointer; 
+                  transition:transform 0.2s ease;" 
+           (click)="goToService('Whatsapp Cloud API')" 
+           onmouseover="this.style.transform='scale(1.15)';" 
+           onmouseout="this.style.transform='scale(1)';">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
+             width="20" height="20" fill="white">
+          <path d="M20 3.5A10.5 10.5 0 003.5 20l-1.5 5 5-1.5A10.5 10.5 0 1020 3.5z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Second row (Digital Marketing under BizCare ERP) -->
+    <div style="display:flex;">
+      <div style="width:42px; height:42px; display:flex; align-items:center; justify-content:center; 
+                  background:#a0522d; border-radius:8px; cursor:pointer; 
+                  transition:transform 0.2s ease;" 
+           (click)="goToService('Digital Marketing')" 
+           onmouseover="this.style.transform='scale(1.15)';" 
+           onmouseout="this.style.transform='scale(1)';">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" 
+             width="20" height="20" fill="white">
+          <path d="M3 13h2v-2H3v2zM3 9h2V7H3v2z"/>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    </div>
+
+    <!-- Other links -->
     <a href="/about" style="text-decoration:none; color:#374151;">About Us</a>
     <a href="/pricing" style="text-decoration:none; color:#374151;">Pricing</a>
   </nav>
 
   <!-- Logo (desktop center, mobile left) -->
   <div class="logo-wrapper">
-    <svg    (click)="goBack()" xmlns="http://www.w3.org/2000/svg" width="36" height="36"
-     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"
-      stroke-linecap="round" stroke-linejoin="round" 
-      class="back-icon  lucide lucide-arrow-left-icon lucide-arrow-left">
-      <path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-    <!-- Back icon (mobile only, works with click) -->
-   
+    <svg (click)="goBack()" xmlns="http://www.w3.org/2000/svg" width="36" height="36"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"
+         stroke-linecap="round" stroke-linejoin="round" 
+         class="back-icon lucide lucide-arrow-left">
+      <path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
+    </svg>
 
     <img src="favicon.ico" alt="logo" style="width:24px; height:24px; border-radius:8px;" />
     <span style="font-size:22px; font-weight:800; letter-spacing:1px; color:#000; font-family:'Georgia', serif;">
@@ -125,62 +197,4 @@
           onmouseout="this.style.backgroundColor='black'; this.style.color='white';">
     Request a Consultation
   </button>
-</div>
-
-<!-- Modal (shared) -->
-<div id="myModal" *ngIf="showModal" 
-     style="display:flex; position:fixed; top:0; left:0; width:100%; height:100%; 
-            background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:1000;">
-  <div [ngStyle]="{background:'white', padding: isMobile ? '20px' : '30px', borderRadius:'16px', 
-                   width:'100%', maxWidth: isMobile ? '320px' : '450px', 
-                   boxShadow:'0 6px 20px rgba(0,0,0,0.3)', fontFamily:'Arial, sans-serif'}">
-    <h2 style="margin-bottom:10px; font-size:22px; color:#111; text-align:center;">Let’s Work Together</h2>
-    <p style="margin-bottom:20px; font-size:14px; color:#555; text-align:center;">
-      Fill in your details and we’ll reach out shortly.
-    </p>
-
-    <form>
-      <input type="text" placeholder="Your Name" 
-             style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; 
-                    border-radius:8px; font-size:14px;" />
-      <input type="email" placeholder="Your Email" 
-             style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; 
-                    border-radius:8px; font-size:14px;" />
-
-      <select style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; 
-                     border-radius:8px; font-size:14px;">
-        <option value="" disabled selected>Budget Range</option>
-        <option>Under $1,000</option>
-        <option>$1,000 – $5,000</option>
-        <option>$5,000 – $10,000</option>
-        <option>Above $10,000</option>
-      </select>
-
-      <select style="width:100%; padding:12px; margin-bottom:12px; border:1px solid #ddd; 
-                     border-radius:8px; font-size:14px;">
-        <option value="" disabled selected>Services Required</option>
-        <option>ERP System</option>
-        <option>Accounting / Inventory / POS</option>
-        <option>WhatsApp Cloud API Integration</option>
-        <option>Digital Marketing</option>
-        <option>E-Commerce Solutions</option>
-        <option>Hardware & Installation Support</option>
-        <option>After-Sales & Maintenance</option>
-        <option>Other</option>
-      </select>
-
-      <textarea placeholder="Tell us more about your project..." 
-                style="width:100%; padding:12px; margin-bottom:15px; border:1px solid #ddd; 
-                       border-radius:8px; font-size:14px; height:90px; resize:none;"></textarea>
-
-      <div style="display:flex; justify-content:space-between; gap:10px;">
-        <button type="button" (click)="closeModal()" 
-                style="flex:1; background:#f5f5f5; border:none; padding:12px; border-radius:9999px; 
-                       cursor:pointer; font-size:14px;">Cancel</button>
-        <button type="submit" 
-                style="flex:1; background:#a86a42; color:white; border:none; padding:12px; 
-                       border-radius:9999px; cursor:pointer; font-size:14px;">Submit</button>
-      </div>
-    </form>
-  </div>
 </div>

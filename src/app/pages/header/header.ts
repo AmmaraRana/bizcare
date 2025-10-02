@@ -2,16 +2,17 @@ import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { EmailModalComponent } from '../../shared/email-modal/email-modal';
+
 @Component({
   selector: 'app-header',
   standalone: true,
-imports: [CommonModule, EmailModalComponent],
+  imports: [CommonModule, EmailModalComponent],
   templateUrl: './header.html',
   styleUrls: ['./header.css']
 })
 export class Header {
   // Dropdown
-  isOpen = false;
+  desktopServices = false;   // <-- add this line for desktop dropdown
 
   // Modal
   showModal = false;
@@ -23,27 +24,18 @@ export class Header {
 
   constructor(private router: Router) {}
 
-  /** Desktop services dropdown */
-  openServices(): void {
-    this.isOpen = true;
-  }
-  closeServices(): void {
-    this.isOpen = false;
-  }
-
   /** Navigate to service */
   goToService(name: string): void {
     const slug = name.replace(/\s+/g, '').toLowerCase();
     this.router.navigate(['/services', slug], { state: { name } });
-    this.mobileMenu = false; // auto-close sidebar on navigation
+    this.mobileMenu = false; 
+    this.desktopServices = false; // auto-close desktop dropdown
   }
 
   /** Modal controls */
   toggleModal(state: boolean): void {
     this.showModal = state;
   }
-
-
 
   /** Hover effects for CTA button */
   onHover(event: Event): void {
@@ -67,18 +59,13 @@ export class Header {
   onResize(): void {
     this.isMobile = window.innerWidth <= 768;
     if (!this.isMobile) {
-      this.mobileMenu = false; // close sidebar if switching to desktop
+      this.mobileMenu = false;
     }
   }
 
-  /** Init check on load */
   ngOnInit(): void {
     this.onResize();
   }
-
-
-
-
 
   toggleMobileMenu() {
     this.mobileMenu = !this.mobileMenu;
@@ -100,6 +87,12 @@ export class Header {
   goBack() {
     history.back();
   }
+  openServices() {
+  this.mobileServices = true;
+}
 
+closeServices() {
+  this.mobileServices = false;
+}
 
 }
